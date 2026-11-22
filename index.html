@@ -1,1 +1,218 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ColorWheel — le mod Minecraft</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22%23CC0000%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14161A;
+    --surface: #1D2026;
+    --border: #2C3038;
+    --text: #EDEBE6;
+    --muted: #A9A8A2;
+    --accent: #CC0000;
+    --accent-bright: #FF7A70;
+    color-scheme: dark;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: inherit; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, .brand { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 700; }
+  a { color: var(--accent-bright); }
+  a:hover { color: #FFB3AC; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 24px 24px 80px; }
+  nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 8px 0 72px; }
+  .brand { font-size: 22px; }
+  nav .links { display: flex; gap: 24px; flex-wrap: wrap; font-size: 15px; }
+  nav .links a { text-decoration: none; color: var(--text); }
+  nav .links a:hover { color: var(--accent-bright); }
 
+  .hero { display: flex; gap: 64px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding-bottom: 96px; }
+  .hero-copy { flex: 1 1 420px; display: flex; flex-direction: column; gap: 24px; }
+  .eyebrow { font-size: 14px; letter-spacing: 0.04em; color: var(--muted); }
+  h1 { margin: 0; font-size: clamp(36px, 6vw, 64px); line-height: 1.05; }
+  .hero-copy p { margin: 0; color: var(--muted); max-width: 520px; }
+  .cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn { display: inline-block; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 500; font-size: 16px; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #E02020; color: #fff; }
+  .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent-bright); color: var(--accent-bright); }
+
+  .wheel-box { flex: none; margin: 0 auto; position: relative; width: min(320px, 70vw); height: min(320px, 70vw); }
+  .pointer {
+    position: absolute; top: -26px; left: 50%; margin-left: -14px;
+    width: 0; height: 0;
+    border-left: 14px solid transparent; border-right: 14px solid transparent;
+    border-top: 26px solid #E62020; z-index: 2;
+  }
+  .wheel {
+    width: 100%; height: 100%; border-radius: 50%;
+    border: 8px solid var(--accent); box-sizing: border-box;
+    background: conic-gradient(
+      #F9FFFE 0 7.69%, #F9801D 7.69% 15.38%, #C74EBD 15.38% 23.08%,
+      #FED83D 23.08% 30.77%, #80C71F 30.77% 38.46%, #F38BAA 38.46% 46.15%,
+      #474F52 46.15% 53.85%, #169C9C 53.85% 61.54%, #8932B8 61.54% 69.23%,
+      #3C44AA 69.23% 76.92%, #835432 76.92% 84.62%, #B02E26 84.62% 92.31%,
+      #1D1D21 92.31% 100%
+    );
+  }
+  .wheel-hub {
+    position: absolute; top: 50%; left: 50%; width: 40px; height: 40px;
+    margin: -20px 0 0 -20px; border-radius: 50%;
+    background: var(--bg); border: 4px solid var(--accent); box-sizing: border-box;
+  }
+
+  section { padding-bottom: 96px; }
+  section h2 { margin: 0 0 32px; font-size: clamp(28px, 4vw, 40px); }
+  section > p.lead { margin: 0 0 32px; color: var(--muted); max-width: 680px; }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 8px; }
+  .step-num { font-size: 40px; font-weight: 700; color: var(--accent-bright); }
+  .card h3 { margin: 0; font-size: 20px; }
+  .card p { margin: 0; color: var(--muted); }
+
+  .colors { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 16px; }
+  .color-row { display: flex; align-items: center; gap: 12px; }
+  .swatch { width: 36px; height: 36px; border-radius: 8px; flex: none; }
+
+  .commands { display: flex; flex-direction: column; gap: 12px; }
+  .command {
+    display: flex; gap: 20px; align-items: baseline; flex-wrap: wrap;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .command code {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    color: var(--accent-bright); min-width: 290px;
+  }
+  .command span { color: var(--muted); }
+
+  footer {
+    border-top: 1px solid var(--border); padding-top: 24px; color: var(--muted);
+    font-size: 15px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #14161A; --surface: #1D2026; --border: #2C3038; --text: #EDEBE6; --muted: #A9A8A2;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="brand">ColorWheel</div>
+    <div class="links">
+      <a href="#comment">Comment ça marche</a>
+      <a href="#couleurs">Les couleurs</a>
+      <a href="#commandes">Commandes</a>
+      <a href="#install">Installation</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">Mod Fabric pour Minecraft 26.2</div>
+      <h1>Une roue tourne.<br>Une couleur disparaît du monde.</h1>
+      <p>Toutes les 5 minutes, une roue de loterie s’affiche à l’écran. Quand elle s’arrête, tous les blocs de la couleur tirée sont supprimés, et on ne peut plus jamais en poser.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/elieXIV/ColorWheel_mod/releases/tag/v1.0.0" target="_blank" rel="noopener">Télécharger ColorWheel 1.0.0</a>
+        <a class="btn btn-ghost" href="#comment">Comment ça marche</a>
+      </div>
+    </div>
+    <div class="wheel-box" aria-hidden="true">
+      <div class="pointer"></div>
+      <div class="wheel"></div>
+      <div class="wheel-hub"></div>
+    </div>
+  </div>
+
+  <section id="comment">
+    <h2>Comment ça marche</h2>
+    <div class="steps">
+      <div class="card">
+        <div class="step-num">1</div>
+        <h3>La roue tourne</h3>
+        <p>Toutes les 5 minutes par défaut, ou quand tu le décides avec une commande. L’animation dure trois secondes.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">2</div>
+        <h3>Une couleur est tirée</h3>
+        <p>La flèche désigne la couleur gagnante, dont le nom s’affiche sous la roue. Une couleur ne peut sortir qu’une seule fois.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">3</div>
+        <h3>Elle disparaît</h3>
+        <p>Laine, béton, verre teinté, moquette et blocs naturels de cette couleur sont supprimés, y compris dans les zones que tu explores ensuite.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="couleurs">
+    <h2>Treize couleurs, sans nuances</h2>
+    <p class="lead">Chaque couleur a ses blocs : le vert emporte l’herbe et les feuilles, le bleu vide l’eau, le gris fait disparaître la pierre. Poser un bloc d’une couleur déjà supprimée est impossible.</p>
+    <div class="colors">
+      <div class="color-row"><div class="swatch" style="background:#F9FFFE;border:1px solid #3A3F48"></div>Blanc</div>
+      <div class="color-row"><div class="swatch" style="background:#F9801D"></div>Orange</div>
+      <div class="color-row"><div class="swatch" style="background:#C74EBD"></div>Magenta</div>
+      <div class="color-row"><div class="swatch" style="background:#FED83D"></div>Jaune</div>
+      <div class="color-row"><div class="swatch" style="background:#80C71F"></div>Vert</div>
+      <div class="color-row"><div class="swatch" style="background:#F38BAA"></div>Rose</div>
+      <div class="color-row"><div class="swatch" style="background:#474F52;border:1px solid #3A3F48"></div>Gris</div>
+      <div class="color-row"><div class="swatch" style="background:#169C9C"></div>Cyan</div>
+      <div class="color-row"><div class="swatch" style="background:#8932B8"></div>Violet</div>
+      <div class="color-row"><div class="swatch" style="background:#3C44AA"></div>Bleu</div>
+      <div class="color-row"><div class="swatch" style="background:#835432"></div>Marron</div>
+      <div class="color-row"><div class="swatch" style="background:#B02E26"></div>Rouge</div>
+      <div class="color-row"><div class="swatch" style="background:#1D1D21;border:1px solid #3A3F48"></div>Noir</div>
+    </div>
+  </section>
+
+  <section id="commandes">
+    <h2>Commandes</h2>
+    <div class="commands">
+      <div class="command"><code>/colorwheel spin</code><span>Lance un tirage tout de suite.</span></div>
+      <div class="command"><code>/colorwheel interval &lt;secondes&gt;</code><span>Change le délai entre deux tirages.</span></div>
+      <div class="command"><code>/colorwheel next &lt;couleur&gt;</code><span>Impose la prochaine couleur, par son nom anglais (RED, BLUE, GREEN…).</span></div>
+      <div class="command"><code>/colorwheel reset</code><span>Rend toutes les couleurs disponibles. Les blocs déjà supprimés ne reviennent pas.</span></div>
+    </div>
+  </section>
+
+  <section id="install">
+    <h2>Installation</h2>
+    <div class="steps">
+      <div class="card"><h3>1. Fabric</h3><p>Installe Fabric Loader pour Minecraft 26.2, avec Java 25.</p></div>
+      <div class="card"><h3>2. Fabric API</h3><p>Télécharge Fabric API (par exemple sur Modrinth) pour la même version.</p></div>
+      <div class="card"><h3>3. Le mod</h3><p>Place le fichier ColorWheel (.jar) et Fabric API dans le dossier mods, puis lance le profil Fabric.</p></div>
+    </div>
+    <div style="margin-top:24px">
+      <a class="btn btn-primary" href="https://github.com/elieXIV/ColorWheel_mod/releases/tag/v1.0.0" target="_blank" rel="noopener">Télécharger ColorWheel 1.0.0</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Créé par Elie</span>
+    <span>Minecraft 26.2 · Fabric · Java 25</span>
+  </footer>
+
+</div>
+</body>
+</html>
