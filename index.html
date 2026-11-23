@@ -130,9 +130,9 @@
 
   <div class="hero">
     <div class="hero-copy">
-      <div class="eyebrow">Mod Fabric pour Minecraft 26.2</div>
-      <h1>Une roue tourne.<br>Une couleur disparaît du monde.</h1>
-      <p>Toutes les 5 minutes, une roue de loterie s’affiche à l’écran. Quand elle s’arrête, tous les blocs de la couleur tirée sont supprimés, et on ne peut plus jamais en poser.</p>
+      <div class="eyebrow">Mod Fabric pour Minecraft 1.21.4</div>
+      <h1>Une roue tourne.<br>Le monde perd ses couleurs.</h1>
+      <p>Toutes les 5 minutes, une roue de loterie s’affiche à l’écran. Quand elle s’arrête, tous les blocs de la couleur tirée disparaissent — et il devient impossible d’en reposer. Couleur après couleur, le monde se vidange, sans jamais revenir en arrière.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://github.com/elieXIV/ColorWheel_mod/releases/tag/v1.0.0" target="_blank" rel="noopener">Télécharger ColorWheel 1.0.0</a>
         <a class="btn btn-ghost" href="#comment">Comment ça marche</a>
@@ -168,30 +168,35 @@
 
   <section id="couleurs">
     <h2>Treize couleurs, sans nuances</h2>
-    <p class="lead">Chaque couleur a ses blocs : le vert emporte l’herbe et les feuilles, le bleu vide l’eau, le gris fait disparaître la pierre. Poser un bloc d’une couleur déjà supprimée est impossible.</p>
-    <div class="colors">
-      <div class="color-row"><div class="swatch" style="background:#F9FFFE;border:1px solid #3A3F48"></div>Blanc</div>
-      <div class="color-row"><div class="swatch" style="background:#F9801D"></div>Orange</div>
-      <div class="color-row"><div class="swatch" style="background:#C74EBD"></div>Magenta</div>
-      <div class="color-row"><div class="swatch" style="background:#FED83D"></div>Jaune</div>
-      <div class="color-row"><div class="swatch" style="background:#80C71F"></div>Vert</div>
-      <div class="color-row"><div class="swatch" style="background:#F38BAA"></div>Rose</div>
-      <div class="color-row"><div class="swatch" style="background:#474F52;border:1px solid #3A3F48"></div>Gris</div>
-      <div class="color-row"><div class="swatch" style="background:#169C9C"></div>Cyan</div>
-      <div class="color-row"><div class="swatch" style="background:#8932B8"></div>Violet</div>
-      <div class="color-row"><div class="swatch" style="background:#3C44AA"></div>Bleu</div>
-      <div class="color-row"><div class="swatch" style="background:#835432"></div>Marron</div>
-      <div class="color-row"><div class="swatch" style="background:#B02E26"></div>Rouge</div>
-      <div class="color-row"><div class="swatch" style="background:#1D1D21;border:1px solid #3A3F48"></div>Noir</div>
+    <p class="lead">Chaque couleur couvre sa famille de blocs décoratifs (laine, béton, verre teinté, moquette, vitre teintée, terracotta, bougies, boîtes de shulker, lits), plus des blocs naturels associés par leur couleur sur la carte. Poser un bloc d’une couleur déjà supprimée est impossible.</p>
+    <div class="colors" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+      <div class="color-row"><div class="swatch" style="background:#F9FFFE;border:1px solid #3A3F48"></div><span><strong>Blanc</strong><br><span style="color:var(--muted);font-size:15px">neige, quartz, os, argile</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#F9801D"></div><span><strong>Orange</strong><br><span style="color:var(--muted);font-size:15px">citrouille, cuivre brut, miel</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#C74EBD"></div><span><strong>Magenta</strong></span></div>
+      <div class="color-row"><div class="swatch" style="background:#FED83D"></div><span><strong>Jaune</strong><br><span style="color:var(--muted);font-size:15px">or, foin, éponge</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#80C71F"></div><span><strong>Vert</strong><br><span style="color:var(--muted);font-size:15px">herbe, feuilles (sauf cerisier), émeraude, mousse, melon, cactus, vignes</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#F38BAA"></div><span><strong>Rose</strong><br><span style="color:var(--muted);font-size:15px">feuilles et bois de cerisier</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#474F52;border:1px solid #3A3F48"></div><span><strong>Gris</strong><br><span style="color:var(--muted);font-size:15px">pierre, cobblestone, andésite, gravier</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#169C9C"></div><span><strong>Cyan</strong><br><span style="color:var(--muted);font-size:15px">fer brut</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#8932B8"></div><span><strong>Violet</strong><br><span style="color:var(--muted);font-size:15px">améthyste, purpur, obsidienne pleurante</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#3C44AA"></div><span><strong>Bleu</strong><br><span style="color:var(--muted);font-size:15px">eau, glace, lapis, diamant, kelp, varech</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#835432"></div><span><strong>Marron</strong><br><span style="color:var(--muted);font-size:15px">terre, boue, bois de chêne</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#B02E26"></div><span><strong>Rouge</strong><br><span style="color:var(--muted);font-size:15px">redstone, champignon rouge, verrues du nether</span></span></div>
+      <div class="color-row"><div class="swatch" style="background:#1D1D21;border:1px solid #3A3F48"></div><span><strong>Noir</strong><br><span style="color:var(--muted);font-size:15px">charbon, obsidienne, blackstone</span></span></div>
     </div>
+    <p style="margin-top:24px;color:var(--muted);font-size:15px">Les blocs essentiels au jeu (coffres, fours, tables de craft, spawners, portails, bedrock…) ne sont jamais supprimés, quelle que soit la couleur tirée.</p>
   </section>
 
   <section id="commandes">
     <h2>Commandes</h2>
     <div class="commands">
       <div class="command"><code>/colorwheel spin</code><span>Lance un tirage tout de suite.</span></div>
-      <div class="command"><code>/colorwheel interval &lt;secondes&gt;</code><span>Change le délai entre deux tirages.</span></div>
+      <div class="command"><code>/colorwheel interval &lt;secondes&gt;</code><span>Change le délai entre deux tirages (ex : 300 = 5 min).</span></div>
       <div class="command"><code>/colorwheel next &lt;couleur&gt;</code><span>Impose la prochaine couleur, par son nom anglais (RED, BLUE, GREEN…).</span></div>
+      <div class="command"><code>/colorwheel radius &lt;blocs&gt;</code><span>Rayon du nettoyage immédiat autour des joueurs (64 blocs par défaut).</span></div>
+      <div class="command"><code>/colorwheel enqueueradius &lt;chunks&gt;</code><span>Rayon de mise en file au moment du tirage (32 chunks par défaut).</span></div>
+      <div class="command"><code>/colorwheel sweepall &lt;true|false&gt;</code><span>Balaye tous les chunks chargés au lieu d’un rayon (peut ralentir le jeu).</span></div>
+      <div class="command"><code>/colorwheel status</code><span>Affiche l’état en cours : couleurs tirées, file de nettoyage, prochains tirages.</span></div>
       <div class="command"><code>/colorwheel reset</code><span>Rend toutes les couleurs disponibles. Les blocs déjà supprimés ne reviennent pas.</span></div>
     </div>
   </section>
@@ -199,7 +204,7 @@
   <section id="install">
     <h2>Installation</h2>
     <div class="steps">
-      <div class="card"><h3>1. Fabric</h3><p>Installe Fabric Loader pour Minecraft 26.2, avec Java 25.</p></div>
+      <div class="card"><h3>1. Fabric</h3><p>Installe Fabric Loader pour Minecraft 1.21.4.</p></div>
       <div class="card"><h3>2. Fabric API</h3><p>Télécharge Fabric API (par exemple sur Modrinth) pour la même version.</p></div>
       <div class="card"><h3>3. Le mod</h3><p>Place le fichier ColorWheel (.jar) et Fabric API dans le dossier mods, puis lance le profil Fabric.</p></div>
     </div>
@@ -210,7 +215,7 @@
 
   <footer>
     <span>Créé par Elie</span>
-    <span>Minecraft 26.2 · Fabric · Java 25</span>
+    <span>Minecraft 1.21.4 · Fabric 0.20.1</span>
   </footer>
 
 </div>
